@@ -1,0 +1,112 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 30px;
+  min-height: 30px;
+  background-color: #4c2d5a;
+}
+
+.navList {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navListItem {
+  margin-right: 20px;
+}
+
+.navLink {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+}
+
+.account {
+  margin-right: 15px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.logoutBtn {
+  height: 30px;
+  width: 80px;
+  font-weight: 600;
+  color: #4c2d5a;
+  background-color: #ebbc56;
+  border: none;
+  border-radius: 4px;
+}
+
+.container {
+  padding: 15px 30px;
+}
+
+.pageTitle {
+  margin: 0;
+  color: #4c2d5a;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 0;
+}
+
+.inputLabel {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.inputLabelText {
+  margin-bottom: 10px;
+}
+
+.input {
+  padding: 10px 15px;
+  width: 250px;
+}
+
+.submitBtn {
+  width: 150px;
+  height: 40px;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #4c2d5a;
+  background-color: #ebbc56;
+  border: none;
+  border-radius: 4px;
+}
+
+.authOption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.authLink {
+  font-size: 20px;
+  font-weight: 600;
+  color: #ebbc56;
+}
