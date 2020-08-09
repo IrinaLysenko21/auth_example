@@ -1,9 +1,11 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import UserProfile from "./UserProfile";
 import * as sessionSelectors from "../redux/session/sessionSelectors";
 import * as sessionOperations from "../redux/session/sessionOperations";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const activeLink = {
   color: "#ebbc56",
@@ -14,23 +16,24 @@ const Navigation = () => {
   const user = useSelector(sessionSelectors.getUser);
 
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const handleLogout = () => {
     dispatch(sessionOperations.logOut());
   };
 
   return (
-    <div className="header">
+    <header className="header">
       <nav className="nav">
         <ul className="navList">
           <li className="navListItem">
             <NavLink className="navLink" activeStyle={activeLink} exact to="/">
-              Home
+              {t("modals.nav.home")}
             </NavLink>
           </li>
           <li className="navListItem">
             <NavLink className="navLink" activeStyle={activeLink} to="/about">
-              About
+              {t("modals.nav.about")}
             </NavLink>
           </li>
           {authenticated && (
@@ -41,7 +44,7 @@ const Navigation = () => {
                   activeStyle={activeLink}
                   to="/account"
                 >
-                  Account
+                  {t("modals.nav.account")}
                 </NavLink>
               </li>
             </>
@@ -54,7 +57,7 @@ const Navigation = () => {
                   activeStyle={activeLink}
                   to="/login"
                 >
-                  Login
+                  {t("modals.auth.login")}
                 </NavLink>
               </li>
               <li className="navListItem">
@@ -63,15 +66,20 @@ const Navigation = () => {
                   activeStyle={activeLink}
                   to="/signup"
                 >
-                  Signup
+                  {t("modals.auth.signup")}
                 </NavLink>
               </li>
             </>
           )}
         </ul>
       </nav>
-      {authenticated && <UserProfile user={user} handleLogout={handleLogout} />}
-    </div>
+      <div className="profileWrap">
+        {authenticated && (
+          <UserProfile user={user} handleLogout={handleLogout} />
+        )}
+        <LanguageSwitcher />
+      </div>
+    </header>
   );
 };
 

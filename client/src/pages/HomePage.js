@@ -1,7 +1,10 @@
+import { useTranslation } from "react-i18next";
 import React from "react";
 
 const HomePage = () => {
-  return <h1>HomePage</h1>;
+  const { t } = useTranslation();
+
+  return <h1>{t("modals.nav.home")}</h1>;
 };
 
 export default HomePage;

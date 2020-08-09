@@ -1,12 +1,14 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 import { Field, reduxForm } from "redux-form";
 import RenderInput from "./RenderInput";
-import { required, maxLength, minLength, email } from "../services/validation";
+import { signupValidation } from "../services/validation";
 import * as sessionOperations from "../redux/session/sessionOperations";
 
 const SignupForm = ({ handleSubmit }) => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const onFormSubmit = (user) => {
     dispatch(sessionOperations.signup(user));
@@ -15,43 +17,39 @@ const SignupForm = ({ handleSubmit }) => {
   return (
     <form className="loginForm" onSubmit={handleSubmit(onFormSubmit)}>
       <label className="inputLabel" htmlFor="loginNameId">
-        <span className="inputLabelText">Name</span>
+        <span className="inputLabelText">{t("modals.auth.name_label")}</span>
         <Field
-          // component="input" // if we're not using our own component
           component={RenderInput}
           id="signupNameId"
           name="name"
           type="name"
-          placeholder="Enter name"
-          validate={[required]}
+          placeholder={t("modals.auth.name_placeholder")}
         />
       </label>
       <label className="inputLabel" htmlFor="loginEmailId">
-        <span className="inputLabelText">Email</span>
+        <span className="inputLabelText">{t("modals.auth.e_mail_label")}</span>
         <Field
-          // component="input" // if we're not using our own component
           component={RenderInput}
           id="signupEmailId"
           name="email"
           type="email"
-          placeholder="Enter email"
-          validate={[required, email]}
+          placeholder={t("modals.auth.e_mail_placeholder")}
         />
       </label>
       <label className="inputLabel" htmlFor="loginPasswordId">
-        <span className="inputLabelText">Password</span>
+        <span className="inputLabelText">
+          {t("modals.auth.password_label")}
+        </span>
         <Field
-          // component="input" // if we're not using our own component
           component={RenderInput}
           id="loginPasswordId"
           name="password"
           type="password"
-          placeholder="Enter password"
-          validate={[required, maxLength, minLength]}
+          placeholder={t("modals.auth.password_placeholder")}
         />
       </label>
       <button className="submitBtn" type="submit">
-        Sign Up
+        {t("modals.auth.signup")}
       </button>
     </form>
   );
@@ -59,4 +57,5 @@ const SignupForm = ({ handleSubmit }) => {
 
 export default reduxForm({
   form: "signup",
+  validate: signupValidation,
 })(SignupForm);

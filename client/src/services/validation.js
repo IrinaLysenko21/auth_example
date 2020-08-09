@@ -1,20 +1,51 @@
 const MIN_PASSWORD_LENGTH = 6;
 const MAX_PASSWORD_LENGTH = 12;
 
-export const required = (value) =>
-  value || typeof value === "number" ? undefined : "Required";
+const validateName = (values, errors) => {
+  if (!values.name || (values.name && values.name.trim() === "")) {
+    errors.name = "Name is required";
+  }
+};
 
-export const email = (value) =>
-  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
-    ? "Invalid email address"
-    : undefined;
+const validateEmail = (values, errors) => {
+  if (!values.email || (values.email && values.email.trim() === "")) {
+    errors.email = "Email is required";
+  }
+  if (
+    values.email &&
+    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email.trim())
+  ) {
+    errors.email = "Invalid email address";
+  }
+};
 
-export const maxLength = (value) =>
-  value && value.length > MAX_PASSWORD_LENGTH
-    ? `Must be ${MAX_PASSWORD_LENGTH} characters or less`
-    : undefined;
+const validatePassword = (values, errors) => {
+  if (!values.password || (values.password && values.password.trim() === "")) {
+    errors.password = "Password is required";
+  }
+  if (values.password && values.password.length > MAX_PASSWORD_LENGTH) {
+    errors.password = `Must be ${MAX_PASSWORD_LENGTH} characters or less`;
+  }
+  if (values.password && values.password.length < MIN_PASSWORD_LENGTH) {
+    errors.password = `Must be ${MIN_PASSWORD_LENGTH} characters or more`;
+  }
+};
 
-export const minLength = (value) =>
-  value && value.length < MIN_PASSWORD_LENGTH
-    ? `Must be ${MIN_PASSWORD_LENGTH} characters or more`
-    : undefined;
+export const loginValidation = (values) => {
+  const errors = {};
+
+  validateEmail(values, errors);
+  validatePassword(values, errors);
+
+  return errors;
+};
+
+export const signupValidation = (values) => {
+  const errors = {};
+
+  validateName(values, errors);
+  validateEmail(values, errors);
+  validatePassword(values, errors);
+
+  return errors;
+};
